@@ -23,7 +23,7 @@ class MatrixNumerical:
         void getInverse() const; //coFactor à utiliser (hint: d´efinir une fonction hors la classe ‘getCoFactor‘)
         template <typename Numeric2>
         friend MatrixNumerical<Numeric2> operator / (const MatrixNumerical& M, const MatrixNumerical& N);
-        static void getIdentity(int n);
+        static MatrixNumerical<Numeric> getIdentity(int n);
     };
 
 template <typename Numeric>
@@ -108,10 +108,38 @@ MatrixNumerical<Numeric> operator * (const MatrixNumerical<Numeric>& M, const Ma
     return result;
 }
 
-
+template <typename Numeric>
+int getCoFactor(const MatrixNumerical<Numeric>& matrix, size_t row, size_t col) {
+    MatrixNumerical<Numeric> result(matrix.getRows() - 1, matrix.getCols() - 1);
+    for (size_t i = 0; i < matrix.getRows(); i++) {
+        for (size_t j = 0; j < matrix.getCols(); j++) {
+            if (i != row && j != col) { // on ajoute que les éléments qui ne sont pas sur la même ligne ou colonne que l'élément de la matrice de base
+                if (i < row && j < col) {
+                    result.addElement(i, j, matrix.getElement(i, j));
+                } else if (i < row && j > col) {
+                    result.addElement(i, j - 1, matrix.getElement(i, j));
+                } else if (i > row && j < col) {
+                    result.addElement(i - 1, j, matrix.getElement(i, j));
+                } else if (i > row && j > col) {
+                    result.addElement(i - 1, j - 1, matrix.getElement(i, j));
+                }
+            }
+        }
+    }
+    return result.getDeterminant();
+};
 template <typename Numeric>
 void MatrixNumerical<Numeric>::getInverse() const {
     
+}
+
+template <typename Numeric>
+MatrixNumerical<Numeric> MatrixNumerical<Numeric>::getIdentity(int n) {
+    MatrixNumerical<Numeric> result(n, n);
+    for (size_t i = 0; i < n; i++) { //création d'une matrice identité
+        result.addElement(i, i, 1);
+    }
+    return result;
 }
 
 #endif

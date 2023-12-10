@@ -32,16 +32,28 @@ int main(){
 
     cout << "Matrice M" << endl;
     M.Display();
+    cout << "-----------------" << endl;
     cout << "Matrice N" << endl;
     N.Display();
+    cout << "-----------------" << endl;
     cout << "Matrice M+N" << endl;
     (M+N).Display();
+    cout << "-----------------" << endl;
     cout << "Matrice M-N" << endl;
     (M-N).Display();
+    cout << "-----------------" << endl;
     cout << "Matrice M*N" << endl;
     (M*N).Display();
+    cout << "-----------------" << endl;
     cout << "det(M)" << endl;
     cout << M.getDeterminant() << endl;
+    cout << "-----------------" << endl;
+    cout << "Matrice identité" << endl;
+    MatrixNumerical<double> I = MatrixNumerical<double>::getIdentity(3);
+    I.Display();
+    cout << "-----------------" << endl;
+    cout << "Matrice inverse" << endl;
+    // M.getInverse().Display();
 
     return 0;
 }
