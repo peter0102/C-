@@ -2,6 +2,7 @@
 #define NUM_MATRIX_H
 #include <iostream>
 #include <vector>
+#include "matrix.h"
 
 using namespace std;
 
@@ -13,26 +14,30 @@ class MatrixNumerical:
         MatrixNumerical(size_t rows, size_t cols);
 
         int getDeterminant() const;
-        MatrixNumerical operator + (const MatrixNumerical& M, const MatrixNumerical& N);
-        MatrixNumerical operator - (const MatrixNumerical& M, const MatrixNumerical& N);
-        MatrixNumerical operator * (const MatrixNumerical& M, const MatrixNumerical& N);
+        template <typename Numeric2>
+        friend MatrixNumerical<Numeric2> operator + (const MatrixNumerical& M, const MatrixNumerical& N); // numeric2 et pas numeric sinon declaration of template shadows template parameter
+        template <typename Numeric2>
+        friend MatrixNumerical<Numeric2> operator - (const MatrixNumerical& M, const MatrixNumerical& N);
+        template <typename Numeric2>
+        friend MatrixNumerical<Numeric2> operator * (const MatrixNumerical& M, const MatrixNumerical& N);
         void getInverse() const; //coFactor à utiliser (hint: d´efinir une fonction hors la classe ‘getCoFactor‘)
-        MatrixNumerical operator / (const MatrixNumerical& M, const MatrixNumerical& N);
-        static void getIdentity(size_t int) const;
+        template <typename Numeric2>
+        friend MatrixNumerical<Numeric2> operator / (const MatrixNumerical& M, const MatrixNumerical& N);
+        static void getIdentity(int n);
     };
 
 template <typename Numeric>
-MatrixNumerical<Numeric>::MatrixNumerical():data(1, vector<Numeric>(1, 0)), rows(1), cols(1) {}
+MatrixNumerical<Numeric>::MatrixNumerical():MatrixBase<Numeric>() {}
 
 template <typename Numeric>
-MatrixNumerical<Numeric>::MatrixNumerical(size_t rows, size_t cols):data(rows, vector<Numeric>(cols, 0)), rows(rows), cols(cols) {}
+MatrixNumerical<Numeric>::MatrixNumerical(size_t rows, size_t cols):MatrixBase<Numeric>(rows, cols) {}
 
 template <typename Numeric>
 int MatrixNumerical<Numeric>::getDeterminant() const { 
     Numeric det = 0;
     if (this->rows != this->cols) {
         cout << "Matrix is not square" << endl;
-        return;
+        return 0;
     }
     if (this->rows == 2) { // matrice 2*2 facile à traiter
        det =  this->data[0][0] * this->data[1][1] - this->data[0][1] * this->data[1][0];
@@ -53,19 +58,19 @@ int MatrixNumerical<Numeric>::getDeterminant() const {
                                                                                       // on alterne entre -1 et 1 pour soustraire ou ajouter
                                                                                       // fonction récursive qui s'arrête quand la sous-matrice est de taille 2
     }
-    return det
+    return det;
 }
 
 template <typename Numeric>
 MatrixNumerical<Numeric> operator + (const MatrixNumerical<Numeric>& M, const MatrixNumerical<Numeric>& N) {
-    if (M.rows != N.rows || M.cols != N.cols) {
+    if (M.getRows() != N.getRows() || M.getCols() != N.getCols()) {
         cout << "Matrices are not of the same size" << endl;
-        return;
+        return MatrixNumerical<Numeric>(0, 0);
     }
-    MatrixNumerical<Numeric> result(M.rows, M.cols);
-    for (size_t i = 0; i < M.rows; i++) {
-        for (size_t j = 0; j < M.cols; j++) {
-            result.addElement(i, j, M.data[i][j] + N.data[i][j]); //addition de matrice élément par élément
+    MatrixNumerical<Numeric> result(M.getRows(), M.getCols());
+    for (size_t i = 0; i < M.getRows(); i++) {
+        for (size_t j = 0; j < M.getCols(); j++) {
+            result.addElement(i, j, M.getElement(i, j) + N.getElement(i, j)); //addition de matrice élément par élément
         }
     }
     return result;
@@ -73,14 +78,14 @@ MatrixNumerical<Numeric> operator + (const MatrixNumerical<Numeric>& M, const Ma
 
 template <typename Numeric>
 MatrixNumerical<Numeric> operator - (const MatrixNumerical<Numeric>& M, const MatrixNumerical<Numeric>& N) {
-    if (M.rows != N.rows || M.cols != N.cols) {
+    if (M.getRows() != N.getRows() || M.getCols() != N.getCols()) {
         cout << "Matrices are not of the same size" << endl;
-        return;
+        return MatrixNumerical<Numeric>(0, 0);
     }
-    MatrixNumerical<Numeric> result(M.rows, M.cols);
-    for (size_t i = 0; i < M.rows; i++) {
-        for (size_t j = 0; j < M.cols; j++) { //soustraction de matrice élément par élément
-            result.addElement(i, j, M.data[i][j] - N.data[i][j]);
+    MatrixNumerical<Numeric> result(M.getRows(), M.getCols());
+    for (size_t i = 0; i < M.getRows(); i++) {
+        for (size_t j = 0; j < M.getCols(); j++) { //soustraction de matrice élément par élément
+            result.addElement(i, j, M.getElement(i, j) - N.getElement(i, j));
         }
     }
     return result;
@@ -88,40 +93,24 @@ MatrixNumerical<Numeric> operator - (const MatrixNumerical<Numeric>& M, const Ma
 
 template <typename Numeric>
 MatrixNumerical<Numeric> operator * (const MatrixNumerical<Numeric>& M, const MatrixNumerical<Numeric>& N) {
-    if (M.cols != N.rows) {
+    if (M.getCols() != N.getRows()) {
         cout << "Matrices are not of the same size" << endl;
-        return;
+        return MatrixNumerical<Numeric>(0, 0);
     }
-    MatrixNumerical<Numeric> result(M.rows, N.cols);
-    for (size_t i = 0; i < M.rows; i++) { //multiplication de matrices
-        for (size_t j = 0; j < N.cols; j++) {
-            for (size_t k = 0; k < M.cols; k++) {
-                result.addElement(i, j, result.data[i][j] + M.data[i][k] * N.data[k][j]);
+    MatrixNumerical<Numeric> result(M.getRows(), N.getCols());
+    for (size_t i = 0; i < M.getRows(); i++) { //multiplication de matrices
+        for (size_t j = 0; j < N.getCols(); j++) {
+            for (size_t k = 0; k < M.getCols(); k++) {
+                result.addElement(i, j, result.getElement(i, j) + M.getElement(i, k) * N.getElement(k, j));
             }
         }
     }
     return result;
 }
 
-template <typename Numeric>
-MatrixNumerical<Numeric> operator / (const MatrixNumerical<Numeric>& M, const MatrixNumerical<Numeric>& N) {
-    if (M.cols != N.rows) {
-        cout << "Matrices are not of the same size" << endl;
-        return;
-    }
-    MatrixNumerical<Numeric> result(M.rows, N.cols);
-    for (size_t i = 0; i < M.rows; i++) {
-        for (size_t j = 0; j < N.cols; j++) {
-            for (size_t k = 0; k < M.cols; k++) {
-                result.addElement(i, j, result.data[i][j] + M.data[i][k] / N.data[k][j]);
-            }
-        }
-    }
-    return result;
-}
 
 template <typename Numeric>
-void MatrixNumerical<Numeric>::getInverse() {
+void MatrixNumerical<Numeric>::getInverse() const {
     
 }
 
