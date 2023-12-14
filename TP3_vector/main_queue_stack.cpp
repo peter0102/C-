@@ -1,10 +1,11 @@
 #include <iostream>
 #include <stack>
 #include <cctype>
+#include <queue>
 
 using namespace std;
 
-bool isPalindrome(const string& input) {
+bool isPalindromeStack(const string& input) {
     stack<char> s;
     for (char c : input) {
         s.push(c);
@@ -18,12 +19,36 @@ bool isPalindrome(const string& input) {
     return true;
 }
 
+bool isPalindromeStackQueue(const string& input) {
+    stack<char> s;
+    queue<char> q;
+    for (char c : input) {
+        s.push(c);
+        q.push(c);
+    }
+    for (char c : input) {
+        if (c != s.top() || c != q.front()) {
+            return false;
+        }
+        s.pop();
+        q.pop();
+    }
+    return true;
+}
+
 int main () {
     cout << boolalpha ;
-    cout << "test isPalindrome" << endl ;
+    cout << "test isPalindromeStack" << endl ;
     cout << "Is 'racecar' a palindrome ? "
-    << isPalindrome("racecar") << endl ;
+    << isPalindromeStack("racecar") << endl ;
     cout << " Is 'hello' a palindrome ? "
-    << isPalindrome("hello" ) << endl ;
+    << isPalindromeStack("hello" ) << endl ;
+
+    cout << "test isPalindromeStackQueue" << endl ;
+    cout << "Is 'racecar' a palindrome ? "
+    << isPalindromeStackQueue("racecar") << endl ;
+    cout << " Is 'hello' a palindrome ? "
+    << isPalindromeStackQueue("hello" ) << endl ;
+
     return 0 ;
 }

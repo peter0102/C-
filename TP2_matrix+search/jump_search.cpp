@@ -22,22 +22,19 @@ int JumpSearch::search(vector<int> arr, int target) { //jump search est une amé
         prev = step; //étape 3 : update prev
         step += sqrt(n); //étape 3 : update step
 
-        if (prev >= n) { //étape 4 : check si la solution est à droite
+        if (prev >= n) {
             return -1;
         }
     }
 
-    while (arr[prev] < target) { //étape 5 : check si la solution est à droite
+    while (arr[prev] < target) { 
         numberComparisons++;
-
-        prev++; //étape 6 : update prev
-
-        if (prev == min(step, n)) { //étape 7 : check si la solution est à droite
+        prev++; 
+        if (prev == min(step, n)) {
             return -1;
         }
     }
-
-    if (arr[prev] == target) { //étape 8 : check si la solution est à droite
+    if (arr[prev] == target) { // linear search
         return prev;
     }
 

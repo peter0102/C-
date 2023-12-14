@@ -18,5 +18,7 @@ class SearchingAlgorithm {
         void displaySearchResults(ostream &os, int result, int target) const;
 
         virtual int search(vector<int> arr, int target) = 0;
+
+        
 };
 #endif
