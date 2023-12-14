@@ -19,10 +19,11 @@ bool isPalindrome(const string& input) {
 }
 
 int main () {
+    cout << boolalpha ;
     cout << "test isPalindrome" << endl ;
-    cout << "Is 'racecar' a palindrome ?"
-    << isPalindrome( "racecar" ) << endl ;
-    cout << " Is ' hello ' a palindrome ? "
+    cout << "Is 'racecar' a palindrome ? "
+    << isPalindrome("racecar") << endl ;
+    cout << " Is 'hello' a palindrome ? "
     << isPalindrome("hello" ) << endl ;
     return 0 ;
 }
