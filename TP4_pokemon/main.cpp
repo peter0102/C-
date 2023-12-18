@@ -6,7 +6,7 @@
 # include <string>
 using namespace std ;
 int main () {
-    Player player1 ( " Hadi " ) ;
+    Player player1 ( "Hadi " ) ;
     player1.addCardToBench (new EnergyCard(" Electric ")) ;
     player1.addCardToBench (new EnergyCard(" Electric ")) ;
     player1.addCardToBench (new TrainerCard(" Ash " , " heal all your action pokemon ")) ;
@@ -19,7 +19,7 @@ int main () {
     player1.displayBench() ;
     cout << endl ;
     player1.displayAction() ;
-    Player player2 ( " Germain " ) ;
+    Player player2 ( "Germain " ) ;
     player2.addCardToBench(new EnergyCard(" Grass ")) ;
     player2.addCardToBench(new TrainerCard (" Brock " , " heal all your action pokemon " ) ) ;
     player2.addCardToBench (new PokemonCard (" Bulbasaur ", " Grass ", " Bulbasaur ", 1 , 100 , 2,
@@ -30,6 +30,8 @@ int main () {
     player2.displayBench() ;
     cout << endl ;
     player2.displayAction() ;
+
+
     player1.attack(0 , 0 , player2 , 0) ;
     cout << endl ;
     player2.displayAction() ;

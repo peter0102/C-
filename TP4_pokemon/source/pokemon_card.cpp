@@ -15,10 +15,33 @@ PokemonCard::PokemonCard(string pokemonName, string pokemonType, string family, 
     this->evolutionLevel = evolutionLevel;
     this->maxHP = maxHP;
     this->hp = maxHP;
-    this->attacks.push_back(make_tuple(attack1_cost, attack1_cost, attack1_name, attack1_damage));
-    this->attacks.push_back(make_tuple(attack2_cost, attack2_cost, attack2_name, attack2_damage));
+    this->reserve = 0;
+    this->attacks.push_back(make_tuple(attack1_cost, this->reserve, attack1_name, attack1_damage))²;
+    this->attacks.push_back(make_tuple(attack2_cost, this->reserve, attack2_name, attack2_damage));
 }
 
 void PokemonCard::displayInfo() const {
-    cout << "Name : " << this->pokemonName << ", Type : " << this->pokemonType << ", Family : " << this->familyName << ", Evolution Level : " << this->evolutionLevel << ", HP : " << this->maxHP << endl;
+    cout << "Name : " << this->pokemonName << ", Type : " << this->pokemonType << ", Family : " << this->familyName << ", Evolution Level : " << this->evolutionLevel << ", HP : " << this->hp;
+    cout << ", Attacks : " << endl;
+for (int i = 0; i < attacks.size(); i++) {
+    cout << "Attack #" << i << endl;
+    cout << "Attack Cost : " << get<0>(attacks[i]) << endl;
+    cout << "Attack current energy storage : " << this->reserve << endl;
+    cout << "Attack name : " << get<2>(attacks[i]) << endl;
+    cout << "Attack damage : " << get<3>(attacks[i]) << endl;
+    cout << endl;
+    }
 }
+
+void PokemonCard::incrementEnergy() {
+    this->reserve++;
+}
+
+string PokemonCard::getAttackName(int attackIndex) {
+    return get<2>(attacks[attackIndex]);
+}
+
+int PokemonCard::getAttackDamage(int attackIndex) {
+    return get<3>(attacks[attackIndex]);
+}
+

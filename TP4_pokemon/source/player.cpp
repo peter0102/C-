@@ -20,9 +20,11 @@ void Player::activatePokemonCard(int index) {
 }
 
 void Player::attachEnergyCard(int benchIndex, int energyIndex) {
-    cout << playerName << "is attaching an Energy Card of type " << benchCards[benchIndex]->cardName << " to the Pokemon " << actionCards[benchIndex]->cardName << endl;
+    cout << playerName << "is attaching an Energy Card of type " << benchCards[benchIndex]->cardName << " to the Pokemon " << actionCards[benchIndex]->pokemonName << endl;
     benchCards.erase(benchCards.begin() + benchIndex);
+    actionCards[benchIndex]->incrementEnergy();
 }
+
 
 void Player::displayBench() {
     cout << "Bench cards for player " << playerName << " : " << endl;
@@ -41,9 +43,24 @@ void Player::displayAction() {
 }
 
 void Player::attack(int actionIndex, int energyIndex, Player &opponent, int opponentActionIndex) {
-
+    string attackName = actionCards[actionIndex]->getAttackName(energyIndex);
+    cout << playerName << "attacking " << opponent.playerName << "'s Pokemon" << opponent.actionCards[opponentActionIndex]->pokemonName << "with the Pokemon " << actionCards[actionIndex]->pokemonName;
+    cout << "with its attack " <<  attackName << endl;
+    int attackDamage = actionCards[actionIndex]->getAttackDamage(energyIndex);
+    cout << "Reducing " << opponent.playerName << "'s Pokemon" << opponent.actionCards[opponentActionIndex]->pokemonName << "'s HP by " << attackDamage << endl;
+    opponent.actionCards[opponentActionIndex]->hp -= attackDamage;
+    if (opponent.actionCards[opponentActionIndex]->hp <= 0) {
+        cout << opponent.playerName << "'s Pokemon" << opponent.actionCards[opponentActionIndex]->pokemonName << "has fainted." << endl;
+        opponent.actionCards.erase(opponent.actionCards.begin() + opponentActionIndex);
+    }
+    else {
+        cout << opponent.playerName << "'s Pokemon" << opponent.actionCards[opponentActionIndex]->pokemonName << "is still alive" << endl;
+    }
 }
 
 void Player::useTrainer(int actionIndex) {
-    cout << playerName << "is using the Trainer Card : " << actionCards[actionIndex]->cardName << " to heal all action cards." << endl;
+    cout << playerName << "is using the Trainer Card to heal all action cards." << endl;
+    for (int i = 0; i < actionCards.size(); i++) {
+        actionCards[i]->hp = actionCards[i]->maxHP;
+    }
 }
