@@ -1,5 +1,4 @@
 # include "headers/card.h"
-# include "headers/pokemon_card.h"
 # include "headers/energy_card.h"
 # include "headers/trainer_card.h"
 # include "headers/player.h"
@@ -11,8 +10,8 @@ int main () {
     player1.addCardToBench (new EnergyCard(" Electric ")) ;
     player1.addCardToBench (new EnergyCard(" Electric ")) ;
     player1.addCardToBench (new TrainerCard(" Ash " , " heal all your action pokemon ")) ;
-    player1.addCardToBench (new PokemonCard(" Pikachu " , " Electric " , " Pikachu " , 2 , 100 , 
-    2 ,"thunder bolt " , 20 , 3 , " thunder storm " , 30) ) ; //cost name damage
+    player1.addCardToBench (new PokemonCard (" Pikachu ", " Electric ", " Pikachu ", 2 , 100 ,2 ,
+    "thunder bolt ", 20 , 3 , " thunder storm ", 30));
     player1.activatePokemonCard(3) ;
     player1.attachEnergyCard(0, 0) ;
     player1.attachEnergyCard(0, 0) ;
@@ -21,10 +20,10 @@ int main () {
     cout << endl ;
     player1.displayAction() ;
     Player player2 ( " Germain " ) ;
-    player2.addCardToBench(new EnergyCard (" Grass " ) ) ;
+    player2.addCardToBench(new EnergyCard(" Grass ")) ;
     player2.addCardToBench(new TrainerCard (" Brock " , " heal all your action pokemon " ) ) ;
-    player2.addCardToBench(new PokemonCard ( " Bulbasaur " , " Grass " , " Bulbasaur " , 1 , 100 , 
-    2 ," LeechSeed " , 15 , 3 , " Vine Whip " , 25) ) ;
+    player2.addCardToBench (new PokemonCard (" Bulbasaur ", " Grass ", " Bulbasaur ", 1 , 100 , 2,
+    " Leech Seed ", 15 , 3 , " Vine Whip ", 25) ) ;
     player2.activatePokemonCard(2) ;
     player2.attachEnergyCard(0, 0) ;
     cout << endl ;

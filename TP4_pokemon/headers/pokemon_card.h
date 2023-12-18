@@ -15,8 +15,7 @@ class PokemonCard : public Card {
         int hp;
         vector<tuple<int, int, string, int>> attacks;
     public:
-        PokemonCard(string cardName, string pokemonType, string familyName, int evolutionLevel, int hp, 
-        int attack1Cost, string attack1Name, int attack1Damage, int attack2Cost, string attack2Name, int attack2Damage):Card(cardName){};
+        PokemonCard(string pokemonName, string type, string family, int evolutionLevel, int maxHP,
+                    int attack1_cost, string attack1_name, int attack1_damage, int attack2_cost, string attack2_name, int attack2_damage);
         void displayInfo() const;
-        void getName() const;
 };

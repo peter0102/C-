@@ -9,6 +9,6 @@ void EnergyCard::displayInfo() const{
     cout << "EnergyType: " << this->energyType << endl;
 }
 
-EnergyCard::EnergyCard(string energyType):Card("Energy"){
+EnergyCard::EnergyCard(string energyType):Card("Energy") {
     this->energyType = energyType;
 }

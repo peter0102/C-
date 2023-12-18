@@ -1,5 +1,10 @@
+#ifndef POKEMON_CARD
+#define POKEMON_CARD
 #include <iostream>
 #include <string>
+#include <vector>
+#include "card.h"
+#include "pokemon_card.h"
 
 using namespace std;
 
@@ -11,10 +16,11 @@ class Player {
     public:
         Player(string playerName);
         void addCardToBench(Card* card);
-        void attachEnergyCard(int, int);
+        void activatePokemonCard(int index);
+        void attachEnergyCard(int benchIndex, int energyIndex);
         void displayBench();
         void displayAction();
-        void activatePokemonCard(int);
-        void attack(int, int, Player, int);
-        void useTrainer(int);
+        void attack(int actionIndex, int energyIndex, Player& opponent, int opponentActionIndex);
+        void useTrainer(int actionIndex);
 };
+#endif

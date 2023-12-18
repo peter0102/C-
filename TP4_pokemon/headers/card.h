@@ -6,10 +6,10 @@
 using namespace std;
 
 class Card {
-    protected:
-        string cardName;
-    public:
+public:
         Card(const string& cardName) : cardName(cardName) {}
         virtual void displayInfo() const = 0;
+
+    string cardName;
 };
 #endif
