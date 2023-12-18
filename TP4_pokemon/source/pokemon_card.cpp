@@ -16,7 +16,7 @@ PokemonCard::PokemonCard(string pokemonName, string pokemonType, string family, 
     this->maxHP = maxHP;
     this->hp = maxHP;
     this->reserve = 0;
-    this->attacks.push_back(make_tuple(attack1_cost, this->reserve, attack1_name, attack1_damage))²;
+    this->attacks.push_back(make_tuple(attack1_cost, this->reserve, attack1_name, attack1_damage));
     this->attacks.push_back(make_tuple(attack2_cost, this->reserve, attack2_name, attack2_damage));
 }
 
@@ -44,4 +44,9 @@ string PokemonCard::getAttackName(int attackIndex) {
 int PokemonCard::getAttackDamage(int attackIndex) {
     return get<3>(attacks[attackIndex]);
 }
+
+int PokemonCard::getAttackCost(int attackIndex) {
+    return get<0>(attacks[attackIndex]);
+}
+
 

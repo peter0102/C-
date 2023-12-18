@@ -23,6 +23,7 @@ public:
 
     string getAttackName(int attackIndex);
     int getAttackDamage(int attackIndex);
+    int getAttackCost(int attackIndex);
 
     int hp;
     int maxHP;

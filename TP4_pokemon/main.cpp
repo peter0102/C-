@@ -34,6 +34,10 @@ int main () {
 
     player1.attack(0 , 0 , player2 , 0) ;
     cout << endl ;
+    player1.displayAction() ;
+    cout << "Pikachu tries to attack again" << endl ;
+    player1.attack(0 , 0 , player2 , 0) ;
+    cout << endl ;
     player2.displayAction() ;
     player2.useTrainer(0) ;
     cout << endl ;

@@ -43,6 +43,11 @@ void Player::displayAction() {
 }
 
 void Player::attack(int actionIndex, int energyIndex, Player &opponent, int opponentActionIndex) {
+    int attackCost = actionCards[actionIndex]->getAttackCost(energyIndex);
+    if (actionCards[actionIndex]->reserve < attackCost) {
+        cout << "Not enough energy to perform this attack." << endl;
+        return;
+    }
     string attackName = actionCards[actionIndex]->getAttackName(energyIndex);
     cout << playerName << "attacking " << opponent.playerName << "'s Pokemon" << opponent.actionCards[opponentActionIndex]->pokemonName << "with the Pokemon " << actionCards[actionIndex]->pokemonName;
     cout << "with its attack " <<  attackName << endl;
@@ -56,6 +61,7 @@ void Player::attack(int actionIndex, int energyIndex, Player &opponent, int oppo
     else {
         cout << opponent.playerName << "'s Pokemon" << opponent.actionCards[opponentActionIndex]->pokemonName << "is still alive" << endl;
     }
+    actionCards[actionIndex]->reserve -= attackCost;
 }
 
 void Player::useTrainer(int actionIndex) {
