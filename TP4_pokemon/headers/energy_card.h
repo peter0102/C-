@@ -6,7 +6,7 @@ using namespace std;
 
 class EnergyCard : public Card {
     protected :
-        string cardName = "EnergyCard";
+        string cardName = "Energy";
         string energyType;
     public:
         EnergyCard(string energyType);

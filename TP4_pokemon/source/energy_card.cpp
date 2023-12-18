@@ -4,6 +4,11 @@
 
 using namespace std;
 
-EnergyCard::EnergyCard(string energyType) {
+void EnergyCard::displayInfo() const{
+    cout << "EnergyCard: " << this->cardName << endl;
+    cout << "EnergyType: " << this->energyType << endl;
+}
+
+EnergyCard::EnergyCard(string energyType):Card("Energy"){
     this->energyType = energyType;
-};
+}
