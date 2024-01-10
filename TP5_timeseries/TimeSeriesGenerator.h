@@ -1,5 +1,6 @@
-#ifndef TIME_SERIES_GENERATOR_H
-#define TIME_SERIES_GENERATOR_H
+#ifndef TP5_TIMESERIES_TIMESERIESGENERATOR_H
+#define TP5_TIMESERIES_TIMESERIESGENERATOR_H
+
 #include <vector>
 
 using namespace std;
@@ -10,8 +11,8 @@ public:
     TimeSeriesGenerator();
     TimeSeriesGenerator(int seed);
     virtual vector<double> generateTimeSeries(int) = 0;
-    void printTimeSeries(const vector<double>);
+    void printTimeSeries(const vector<double>&);
 };
 
 
-#endif
+#endif //TP5_TIMESERIES_TIMESERIESGENERATOR_H

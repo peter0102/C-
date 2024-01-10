@@ -1,5 +1,11 @@
 "C:\Program Files\JetBrains\CLion 2023.3.1\bin\cmake\win\x64\bin\cmake.exe" -DCMAKE_BUILD_TYPE=Debug "-DCMAKE_MAKE_PROGRAM=C:/Program Files/JetBrains/CLion 2023.3.1/bin/ninja/win/x64/ninja.exe" -G Ninja -S C:\Users\LINPa\travail\2A\CPP\Cpp\TP5_time_series -B C:\Users\LINPa\travail\2A\CPP\Cpp\TP5_time_series\cmake-build-debug
--- Configuring done (0.1s)
+-- The C compiler identification is GNU 13.1.0
+-- Detecting C compiler ABI info
+-- Detecting C compiler ABI info - done
+-- Check for working C compiler: C:/Program Files/JetBrains/CLion 2023.3.1/bin/mingw/bin/gcc.exe - skipped
+-- Detecting C compile features
+-- Detecting C compile features - done
+-- Configuring done (2.3s)
 CMake Error: CMake can not determine linker language for target: TP5_time_series
 -- Generating done (0.0s)
 CMake Generate step failed.  Build files cannot be regenerated correctly.

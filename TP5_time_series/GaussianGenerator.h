@@ -8,7 +8,7 @@ class GaussianGenerator {
             GaussianGenerator();
             GaussianGenerator(int seed);
             vector<double> generateTimeSeries(int);
-
+            void boxMuller(double&, double&);
             int mean;
             int std;
     }
