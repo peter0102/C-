@@ -2,7 +2,7 @@
 // Created by Istiak on 10/01/2024.
 //
 
-#include "SinWaveGenerator.h"
+#include "../headers/SinWaveGenerator.h"
 #include <cmath>
 
 using namespace std;

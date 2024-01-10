@@ -2,7 +2,7 @@
 // Created by Istiak on 10/01/2024.
 //
 
-#include "TimeSeriesDataset.h"
+#include "../headers/TimeSeriesDataset.h"
 #include <cmath>
 
 TimeSeriesDataset::TimeSeriesDataset() {
@@ -37,8 +37,7 @@ void TimeSeriesDataset::znormalization(vector<double> &timeSeries) {
     }
 }
 
-void TimeSeriesDataset::addTimeSeries(TimeSeriesGenerator *generator, int label) {
-    vector<double> timeSeries = generator->generateTimeSeries(100);
+void TimeSeriesDataset::addTimeSeries(vector<double> timeSeries, int label) {
     if (znormalize) {
         znormalization(timeSeries);
     }

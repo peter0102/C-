@@ -14,11 +14,11 @@ public:
     bool znormalize;
     bool isTrain;
     vector<double> data;
-    vector<double> labels;
+    vector<int> labels;
     int maxLength;
     int numberOfSamples;
     void znormalization(vector<double> &timeSeries);
-    void addTimeSeries(TimeSeriesGenerator *generator, int label);
+    void addTimeSeries(vector<double> timeSeries, int label);
 };
 
 

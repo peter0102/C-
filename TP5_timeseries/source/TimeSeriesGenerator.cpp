@@ -1,4 +1,4 @@
-#import "TimeSeriesGenerator.h"
+#import "../headers/TimeSeriesGenerator.h"
 #import <vector>
 #import <iostream>
 

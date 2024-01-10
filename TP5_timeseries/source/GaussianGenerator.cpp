@@ -2,7 +2,7 @@
 // Created by Istiak on 09/01/2024.
 //
 
-#include "GaussianGenerator.h"
+#include "../headers/GaussianGenerator.h"
 #include <iostream>
 #include <vector>
 #include <cmath>
