@@ -42,6 +42,7 @@ void TimeSeriesDataset::addTimeSeries(vector<double> timeSeries, int label) {
         znormalization(timeSeries);
     }
     data.insert(data.end(), timeSeries.begin(), timeSeries.end());
+    data2D.push_back(timeSeries);
     labels.push_back(label);
     if (timeSeries.size() > maxLength) {
         maxLength = timeSeries.size();

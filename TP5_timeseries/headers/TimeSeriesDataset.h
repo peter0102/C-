@@ -14,6 +14,7 @@ public:
     bool znormalize;
     bool isTrain;
     vector<double> data;
+    vector<vector<double>> data2D;
     vector<int> labels;
     int maxLength;
     int numberOfSamples;
